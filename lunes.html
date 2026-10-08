@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcf9fb">
+    <title>MyRoutine · Mi lunes</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="dias.css">
+</head>
+<body data-day="lunes">
+    <button class="sidebar-open-btn" id="sidebarOpenBtn" type="button" aria-label="Abrir menú" aria-controls="sidebar">☰</button>
+
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Cerrar menú">×</button>
+        <a class="logo" href="index.html" aria-label="MyRoutine, mi semana"><span class="logo-my">My</span><span class="logo-routine">Routine</span><span class="logo-spark" aria-hidden="true">✿</span></a>
+        <p class="side-caption">PLANIFICADOR PERSONAL</p>
+        <p class="menu-title">Principal</p>
+        <nav class="menu" aria-label="Principal">
+            <a href="index.html" class="week-link"><span class="nav-symbol" aria-hidden="true">⌂</span><span>Mi semana</span></a>
+        </nav>
+        <p class="menu-title days-title">Días</p>
+        <nav class="menu days-menu" aria-label="Días de la semana">
+            <a href="lunes.html" class="day-link active" aria-current="page"><span class="day-index">01</span><span>Lunes</span></a>
+<a href="martes.html" class="day-link"><span class="day-index">02</span><span>Martes</span></a>
+<a href="miercoles.html" class="day-link"><span class="day-index">03</span><span>Miércoles</span></a>
+<a href="jueves.html" class="day-link"><span class="day-index">04</span><span>Jueves</span></a>
+<a href="viernes.html" class="day-link"><span class="day-index">05</span><span>Viernes</span></a>
+<a href="sabado.html" class="day-link"><span class="day-index">06</span><span>Sábado</span></a>
+<a href="domingo.html" class="day-link"><span class="day-index">07</span><span>Domingo</span></a>
+        </nav>
+        <div class="sidebar-themes">
+            <p class="menu-title">Temas</p>
+            <div class="theme-options" id="themeOptions" role="group" aria-label="Elegir tema">
+    <button class="theme-circle" data-theme="rosa" style="--swatch:#e89ab0" aria-label="Tema rosa" title="Rosa"></button>
+    <button class="theme-circle" data-theme="morado" style="--swatch:#9478c5" aria-label="Tema morado" title="Morado"></button>
+    <button class="theme-circle" data-theme="azul" style="--swatch:#729cc5" aria-label="Tema azul" title="Azul"></button>
+    <button class="theme-circle" data-theme="verde" style="--swatch:#81a88d" aria-label="Tema verde" title="Verde"></button>
+    <button class="theme-circle" data-theme="naranja" style="--swatch:#d99562" aria-label="Tema naranja" title="Naranja"></button>
+</div>
+        </div>
+        <div class="sidebar-note"><span class="note-flower" aria-hidden="true">✿</span><span>Un paso a la vez.</span></div>
+    </aside>
+
+    <main class="main daily-main">
+        <header class="topbar">
+            <div class="search-display" aria-label="Buscador visual; no activo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 4.2 4.2"></path></svg>
+                <span>Buscar aquí</span>
+                <span class="search-key" aria-hidden="true">⌕</span>
+            </div>
+            <div class="topbar-actions" aria-hidden="true"><span class="top-action top-action-chat">···</span><span class="top-action top-action-bell">✿</span></div>
+        </header>
+
+        <div class="day-heading">
+            <div>
+                <p class="day-label">LUNES · 01</p>
+                <h1 class="title">Mi lunes</h1>
+                <p class="subtitle">Organiza y completa tus tareas del día.</p>
+            </div>
+            <a href="index.html" class="back"><span aria-hidden="true">←</span> Mi semana</a>
+        </div>
+
+        <section class="day-hero" aria-label="Tu ritmo de hoy">
+            <div class="day-hero-copy">
+                <span class="eyebrow">UN DÍA A LA VEZ</span>
+                <h2>Tu día toma forma</h2>
+                <p>Un pequeño avance también cuenta.</p>
+            </div>
+            <div class="day-hero-progress" role="group" aria-label="Progreso del día">
+                <div class="day-hero-progress-label"><span>Avance de hoy</span><strong id="day-progress-copy">0%</strong></div>
+                <div class="day-hero-progress-track" aria-hidden="true"><span id="day-progress-hero"></span></div>
+            </div>
+            <span class="day-hero-flower" aria-hidden="true">✿</span>
+            <span class="day-hero-sprig" aria-hidden="true">❋</span>
+        </section>
+
+        <section class="tasks" aria-labelledby="tasksTitle">
+            <div class="tasks-header">
+                <div><p class="section-kicker">TU LISTA</p><h2 id="tasksTitle">Tareas de hoy</h2></div>
+                <button class="add-button" id="addTaskBtn" type="button"><span aria-hidden="true">＋</span> Agregar tarea</button>
+            </div>
+            <div id="tasksList"></div>
+        </section>
+    </main>
+
+    <aside class="right-panel" aria-label="Resumen de la semana">
+        <section class="profile-mini">
+            <div class="profile-avatar" aria-hidden="true">M</div>
+            <div><strong>Mi espacio</strong><span>Rutinas que florecen</span></div>
+            <span class="profile-flower" aria-hidden="true">✿</span>
+        </section>
+        <section class="daily-summary" aria-labelledby="summaryTitle">
+            <p class="rail-eyebrow">LUNES · HOY</p>
+            <h2 id="summaryTitle">Tu progreso</h2>
+            <div class="summary-feature">
+                <div class="summary-ring" role="img" aria-label="0% completado"><span id="summary-percent" aria-hidden="true">0%</span></div>
+                <div><strong>Buen ritmo</strong><span>Los pasos pequeños suman.</span></div>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-line"><span>Tareas planeadas</span><strong id="summary-total">0</strong></div>
+            <div class="summary-line"><span>Completadas</span><strong id="summary-completed">0</strong></div>
+            <div class="summary-progress" role="presentation"><span id="day-progress-bar"></span></div>
+        </section>
+        <section class="rail-week" aria-labelledby="railWeekTitle">
+            <div class="rail-section-heading"><h2 id="railWeekTitle">Esta semana</h2><span aria-hidden="true">···</span></div>
+            <div class="rail-day-list">
+                <a class="rail-day" href="lunes.html" data-rail-day="lunes"><span class="rail-day-name">Lunes</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="martes.html" data-rail-day="martes"><span class="rail-day-name">Martes</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="miercoles.html" data-rail-day="miercoles"><span class="rail-day-name">Miércoles</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="jueves.html" data-rail-day="jueves"><span class="rail-day-name">Jueves</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="viernes.html" data-rail-day="viernes"><span class="rail-day-name">Viernes</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="sabado.html" data-rail-day="sabado"><span class="rail-day-name">Sábado</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+<a class="rail-day" href="domingo.html" data-rail-day="domingo"><span class="rail-day-name">Domingo</span><span class="rail-day-meter"><span class="rail-day-fill"></span></span><span class="rail-day-percent">0%</span></a>
+            </div>
+        </section>
+        <section class="rail-message"><span class="message-icon" aria-hidden="true">✿</span><div><strong>Un hábito a la vez</strong><p>Tu constancia también merece una pausa.</p></div></section>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>

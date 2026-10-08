@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 370" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Puerta de cuento entre flores</title>
+  <defs>
+    <linearGradient id="wood" x1="126" y1="86" x2="330" y2="348" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8C4B5"/>
+      <stop offset="1" stop-color="#B98B79"/>
+    </linearGradient>
+    <linearGradient id="door" x1="161" y1="103" x2="300" y2="343" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F7"/>
+      <stop offset="1" stop-color="#F5E4E1"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="202" y1="130" x2="257" y2="205" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C6DFE0"/>
+      <stop offset="1" stop-color="#8FB9BE"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="229" cy="344" rx="207" ry="18" fill="#EAA9B9" fill-opacity=".48"/>
+  <path d="M89 337V173c0-78 61-141 137-141s137 63 137 141v164" stroke="#D5A894" stroke-width="17" stroke-linecap="round"/>
+  <path d="M107 337V174c0-68 53-124 119-124s119 56 119 124v163" fill="url(#wood)" stroke="#A97867" stroke-width="5"/>
+  <path d="M135 337V175c0-52 41-95 91-95s91 43 91 95v162" fill="url(#door)" stroke="#FFF8F5" stroke-width="8"/>
+  <path d="M151 337V176c0-43 34-79 75-79s75 36 75 79v161" stroke="#DFC1B8" stroke-width="3"/>
+  <path d="M171 337V177c0-32 25-58 55-58s55 26 55 58v160" stroke="#F9EFEB" stroke-width="4"/>
+  <path d="M192 166c0-20 15-36 34-36s34 16 34 36v38h-68v-38Z" fill="url(#glass)" stroke="#B98B79" stroke-width="5"/>
+  <path d="M204 165c0-13 10-24 22-24s22 11 22 24v27h-44v-27Z" stroke="#E6F3EF" stroke-width="3"/>
+  <path d="M228 130v74m-36-38h68" stroke="#B98B79" stroke-width="3"/>
+  <path d="M138 249h176M138 294h176" stroke="#DABCB1" stroke-width="4"/>
+  <path d="M149 254h154m-154 45h154" stroke="#FFFDFC" stroke-width="2"/>
+  <circle cx="281" cy="229" r="8" fill="#D5AE73" stroke="#B78C57" stroke-width="3"/>
+  <circle cx="233" cy="261" r="7" fill="#E7C9B8" stroke="#CDA894" stroke-width="3"/>
+  <path d="M45 329c37-26 51-60 49-109m-62 91c30-4 50-18 64-43M39 276c18-12 31-26 39-45m-56 10c27-3 44-14 57-35" stroke="#8DA77E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M433 332c-35-27-48-63-43-113m60 93c-30-5-49-19-61-45m69-20c-28-4-43-16-55-38m42-18c-26-4-42-16-53-38" stroke="#8DA77E" stroke-width="5" stroke-linecap="round"/>
+  <path d="M42 299c-23-1-31-14-28-29 19-2 31 7 28 29Zm27-36c-18-9-21-24-12-36 17 5 24 17 12 36Zm-43-31c-18-2-26-14-23-27 16-2 26 6 23 27Zm381 67c22-2 30-15 26-29-18-1-30 9-26 29Zm-24-37c18-9 20-24 10-36-17 6-23 18-10 36Zm42-31c18-3 25-15 21-28-16-1-26 8-21 28Z" fill="#A7C091"/>
+  <g fill="#F7D7DF" stroke="#E7A9BA" stroke-width="2">
+    <circle cx="85" cy="190" r="10"/><circle cx="76" cy="185" r="7"/><circle cx="94" cy="184" r="7"/><circle cx="84" cy="177" r="7"/><circle cx="85" cy="199" r="7"/>
+    <circle cx="374" cy="175" r="11"/><circle cx="364" cy="169" r="7"/><circle cx="384" cy="168" r="7"/><circle cx="374" cy="160" r="7"/><circle cx="374" cy="183" r="7"/>
+    <circle cx="105" cy="119" r="9"/><circle cx="96" cy="114" r="6"/><circle cx="113" cy="112" r="6"/><circle cx="105" cy="106" r="6"/><circle cx="105" cy="127" r="6"/>
+    <circle cx="352" cy="111" r="9"/><circle cx="344" cy="106" r="6"/><circle cx="360" cy="104" r="6"/><circle cx="352" cy="98" r="6"/><circle cx="352" cy="119" r="6"/>
+    <circle cx="143" cy="73" r="7"/><circle cx="137" cy="69" r="5"/><circle cx="149" cy="67" r="5"/><circle cx="143" cy="62" r="5"/>
+    <circle cx="311" cy="69" r="7"/><circle cx="305" cy="65" r="5"/><circle cx="317" cy="63" r="5"/><circle cx="311" cy="58" r="5"/>
+    <circle cx="57" cy="323" r="11"/><circle cx="47" cy="317" r="7"/><circle cx="67" cy="316" r="7"/><circle cx="57" cy="308" r="7"/><circle cx="57" cy="331" r="7"/>
+    <circle cx="403" cy="322" r="11"/><circle cx="393" cy="316" r="7"/><circle cx="413" cy="315" r="7"/><circle cx="403" cy="307" r="7"/><circle cx="403" cy="330" r="7"/>
+  </g>
+  <g fill="#E5B96C">
+    <circle cx="85" cy="190" r="3"/><circle cx="374" cy="175" r="3"/><circle cx="105" cy="119" r="3"/><circle cx="352" cy="111" r="3"/><circle cx="143" cy="73" r="2.5"/><circle cx="311" cy="69" r="2.5"/><circle cx="57" cy="323" r="3"/><circle cx="403" cy="322" r="3"/>
+  </g>
+  <path d="M166 63c5-12 15-18 27-18m80 8c9-7 19-8 29-3" stroke="#F9E9E5" stroke-width="4" stroke-linecap="round"/>
+  <path d="M103 337h251" stroke="#F9E8DC" stroke-width="6" stroke-linecap="round"/>
+</svg>
