@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fcf9fb">
+    <title>MyRoutine · Calendario</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="calendario.css">
+</head>
+<body>
+    <button class="sidebar-open-btn" id="sidebarOpenBtn" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button>
+    <aside class="sidebar" id="sidebar">
+        <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Cerrar menú" aria-controls="sidebar" aria-expanded="true">×</button>
+        <a class="logo" href="index.html" aria-label="MyRoutine, mi semana"><span class="logo-my">My</span><span class="logo-routine">Routine</span><span class="logo-spark" aria-hidden="true">✿</span></a>
+        <p class="side-caption">PLANIFICADOR PERSONAL</p>
+        <p class="menu-title">Principal</p>
+        <nav class="menu" aria-label="Principal">
+            <a href="index.html" class="week-link"><span class="nav-symbol" aria-hidden="true">⌂</span><span>Mi semana</span></a>
+            <a href="calendario.html" class="week-link active" aria-current="page"><span class="nav-symbol" aria-hidden="true">▦</span><span>Calendario</span></a>
+        </nav>
+        <p class="menu-title days-title">Días</p>
+        <nav class="menu days-menu" aria-label="Días de la semana">
+            <a href="lunes.html" class="day-link"><span class="day-index">01</span><span>Lunes</span></a>
+            <a href="martes.html" class="day-link"><span class="day-index">02</span><span>Martes</span></a>
+            <a href="miercoles.html" class="day-link"><span class="day-index">03</span><span>Miércoles</span></a>
+            <a href="jueves.html" class="day-link"><span class="day-index">04</span><span>Jueves</span></a>
+            <a href="viernes.html" class="day-link"><span class="day-index">05</span><span>Viernes</span></a>
+            <a href="sabado.html" class="day-link"><span class="day-index">06</span><span>Sábado</span></a>
+            <a href="domingo.html" class="day-link"><span class="day-index">07</span><span>Domingo</span></a>
+        </nav>
+        <div class="sidebar-themes">
+            <p class="menu-title">Temas</p>
+            <div class="theme-options" id="themeOptions" role="group" aria-label="Elegir tema">
+                <button class="theme-circle" data-theme="rosa" style="--swatch:#e89ab0" aria-label="Tema rosa" title="Rosa"></button>
+                <button class="theme-circle" data-theme="morado" style="--swatch:#9478c5" aria-label="Tema morado" title="Morado"></button>
+                <button class="theme-circle" data-theme="azul" style="--swatch:#729cc5" aria-label="Tema azul" title="Azul"></button>
+                <button class="theme-circle" data-theme="verde" style="--swatch:#81a88d" aria-label="Tema verde" title="Verde"></button>
+                <button class="theme-circle" data-theme="naranja" style="--swatch:#d99562" aria-label="Tema naranja" title="Naranja"></button>
+            </div>
+        </div>
+        <div class="sidebar-note"><span class="note-flower" aria-hidden="true">✿</span><span>Un paso a la vez.</span></div>
+    </aside>
+
+    <main class="main calendar-main">
+        <header class="calendar-page-heading">
+            <div>
+                <p class="section-kicker">TUS FECHAS IMPORTANTES</p>
+                <h1>Tu calendario</h1>
+                <p>Organiza tus eventos y ten tus planes a la vista.</p>
+            </div>
+            <a class="calendar-back-link" href="index.html"><span aria-hidden="true">←</span> Mi semana</a>
+        </header>
+
+        <section class="calendar-card" aria-labelledby="monthTitle">
+            <div class="calendar-toolbar">
+                <div class="month-navigation" aria-label="Navegación del calendario">
+                    <button class="calendar-icon-button" id="previousMonth" type="button" aria-label="Mes anterior" title="Mes anterior">‹</button>
+                    <button class="calendar-icon-button" id="nextMonth" type="button" aria-label="Mes siguiente" title="Mes siguiente">›</button>
+                </div>
+                <h2 id="monthTitle" aria-live="polite"></h2>
+                <button class="calendar-today-button" id="todayButton" type="button">Hoy</button>
+            </div>
+            <div class="calendar-weekdays" aria-hidden="true">
+                <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+            </div>
+            <div class="calendar-grid" id="calendarGrid" role="group" aria-label="Días del mes"></div>
+        </section>
+
+        <section class="selected-day-card" aria-labelledby="selectedDateTitle">
+            <div class="selected-day-heading">
+                <div>
+                    <p class="section-kicker">TU AGENDA</p>
+                    <h2 id="selectedDateTitle"></h2>
+                </div>
+                <button class="add-event-button" id="addEventButton" type="button"><span aria-hidden="true">＋</span> Agregar evento</button>
+            </div>
+            <p class="calendar-status" id="calendarStatus" role="status" aria-live="polite"></p>
+            <ul class="event-list" id="eventList" aria-labelledby="selectedDateTitle"></ul>
+            <p class="empty-events" id="emptyEvents">No hay eventos para este día. Puedes agregar uno cuando quieras.</p>
+
+            <form class="event-form" id="eventForm" hidden>
+                <div class="event-form-heading">
+                    <div><p class="section-kicker">DETALLES</p><h3 id="eventFormTitle">Nuevo evento</h3></div>
+                    <button class="form-close-button" id="cancelEventButton" type="button" aria-label="Cancelar y cerrar formulario">×</button>
+                </div>
+                <div class="form-field">
+                    <label for="eventTitle">Título</label>
+                    <input id="eventTitle" name="title" type="text" autocomplete="off" required placeholder="Por ejemplo, cita con el dentista">
+                </div>
+                <div class="form-field-grid">
+                    <div class="form-field">
+                        <label for="eventDate">Fecha</label>
+                        <input id="eventDate" name="startDate" type="date" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="eventTime">Hora <span>(opcional)</span></label>
+                        <input id="eventTime" name="time" type="time">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="eventRecurrence">Repetir</label>
+                    <select id="eventRecurrence" name="recurrence">
+                        <option value="none">No se repite</option>
+                        <option value="daily">Cada día</option>
+                        <option value="weekly">Cada semana</option>
+                        <option value="monthly">Cada mes</option>
+                    </select>
+                </div>
+                <div class="form-field" id="endDateField" hidden>
+                    <label for="eventEndDate">Repetir hasta <span>(opcional)</span></label>
+                    <input id="eventEndDate" name="endDate" type="date">
+                </div>
+                <p class="event-form-error" id="eventFormError" role="alert" hidden></p>
+                <div class="event-form-actions">
+                    <button class="form-cancel-button" id="cancelEventButtonBottom" type="button">Cancelar</button>
+                    <button class="form-save-button" type="submit">Guardar evento</button>
+                </div>
+            </form>
+        </section>
+
+        <footer class="main-footer">
+            <div class="footer-message"><span class="footer-flower" aria-hidden="true">✿</span><span>Avanza con calma, celebra cada paso.</span></div>
+            <nav class="legal-links" aria-label="Información legal">
+                <a class="legal-link" href="terminos.html">Términos y condiciones</a>
+                <a class="legal-link" href="privacidad.html">Política de privacidad</a>
+            </nav>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+    <script src="calendario.js"></script>
+</body>
+</html>
