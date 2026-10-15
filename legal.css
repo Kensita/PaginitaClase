@@ -1,0 +1,133 @@
+.legal-page {
+    display: block;
+    min-height: 100vh;
+    background: var(--color-canvas);
+}
+
+.legal-header {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 15px clamp(20px, 5vw, 64px);
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-white);
+}
+
+.legal-brand {
+    margin: 0;
+}
+
+.legal-home,
+.legal-back {
+    color: var(--color-primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.legal-home:hover,
+.legal-back:hover {
+    color: var(--color-primary-darker);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.legal-main {
+    width: min(820px, calc(100% - 40px));
+    margin: 38px auto 56px;
+}
+
+.legal-card {
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: 25px;
+    background: var(--color-white);
+    box-shadow: var(--shadow-soft);
+}
+
+.legal-heading {
+    padding: clamp(23px, 5vw, 42px) clamp(22px, 5vw, 48px) 23px;
+    border-bottom: 1px solid var(--color-line);
+    background: linear-gradient(135deg, var(--color-primary-soft), var(--color-white) 70%);
+}
+
+.legal-kicker {
+    margin: 0 0 8px;
+    color: var(--color-primary-dark);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.legal-heading h1 {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: clamp(25px, 5vw, 36px);
+    letter-spacing: -1px;
+    line-height: 1.15;
+}
+
+.legal-updated {
+    margin: 12px 0 0;
+    color: var(--color-muted);
+    font-size: 11px;
+}
+
+.legal-content {
+    padding: 8px clamp(22px, 5vw, 48px) 32px;
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.legal-content p {
+    margin: 17px 0;
+}
+
+.legal-content section {
+    margin-top: 25px;
+}
+
+.legal-content h2 {
+    margin: 0 0 8px;
+    color: var(--color-primary-dark);
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.legal-content ul {
+    margin: 8px 0 18px;
+    padding-left: 22px;
+}
+
+.legal-content li + li {
+    margin-top: 5px;
+}
+
+.legal-back {
+    display: inline-flex;
+    margin: 20px 0 0 4px;
+}
+
+@media (max-width: 480px) {
+    .legal-header {
+        min-height: 66px;
+        padding-right: 17px;
+        padding-left: 17px;
+    }
+
+    .legal-home {
+        font-size: 10px;
+    }
+
+    .legal-main {
+        width: calc(100% - 28px);
+        margin-top: 22px;
+    }
+
+    .legal-card {
+        border-radius: 19px;
+    }
+}

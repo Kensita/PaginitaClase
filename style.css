@@ -322,20 +322,6 @@
     text-align: right;
 }
 
-.main-footer {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 16px 1px 0;
-    color: #6b646d;
-    font-size: 9px;
-}
-
-.footer-flower {
-    color: #566f4e;
-    font-size: 13px;
-}
-
 @media (max-width: 1120px) {
     .hero {
         min-height: 212px;
