@@ -25,7 +25,7 @@
     const endDateField = document.getElementById('endDateField');
     const addEventButton = document.getElementById('addEventButton');
 
-    const todayKey = toDateKey(new Date());
+    let todayKey = toDateKey(new Date());
     let selectedDateKey = todayKey;
     let currentMonth = parseDateKey(todayKey);
     let events = loadEvents();
@@ -47,6 +47,30 @@
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
+    }
+
+    function refreshTodayKey() {
+        const currentDateKey = toDateKey(new Date());
+        if (currentDateKey === todayKey) return false;
+
+        const previousTodayKey = todayKey;
+        todayKey = currentDateKey;
+        if (selectedDateKey === previousTodayKey) {
+            selectedDateKey = currentDateKey;
+            const today = parseDateKey(currentDateKey);
+            currentMonth = new Date(today.getFullYear(), today.getMonth(), 1, 12);
+        }
+        return true;
+    }
+
+    function scheduleTodayRefresh() {
+        const now = new Date();
+        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1);
+        const delay = Math.max(1, nextMidnight.getTime() - now.getTime());
+        window.setTimeout(() => {
+            if (refreshTodayKey()) render();
+            scheduleTodayRefresh();
+        }, delay);
     }
 
     function getMonthCells(year, monthIndex) {
@@ -99,6 +123,21 @@
             console.warn('No se pudieron guardar los eventos.', error);
             return false;
         }
+    }
+
+    function updateStoredEvents(change) {
+        const latestEvents = loadEvents();
+        const nextEvents = change(latestEvents);
+        if (nextEvents === null) {
+            events = latestEvents;
+            return 'missing';
+        }
+        if (!saveEvents(nextEvents)) {
+            events = latestEvents;
+            return 'storage-error';
+        }
+        events = nextEvents;
+        return 'saved';
     }
 
     function getOccurrencesForDate(eventSeries, dateKey) {
@@ -295,25 +334,33 @@
             return;
         }
 
+        const eventIdToEdit = editingEventId;
         const nextEvent = {
-            id: editingEventId || makeId(),
+            id: eventIdToEdit || makeId(),
             title,
             startDate,
             time: timeInput.value,
             recurrence,
             endDate,
         };
-        const nextEvents = editingEventId
-            ? events.map((storedEvent) => storedEvent.id === editingEventId ? nextEvent : storedEvent)
-            : [...events, nextEvent];
+        const result = updateStoredEvents((latestEvents) => {
+            if (!eventIdToEdit) return [...latestEvents, nextEvent];
+            if (!latestEvents.some((storedEvent) => storedEvent.id === eventIdToEdit)) return null;
+            return latestEvents.map((storedEvent) => storedEvent.id === eventIdToEdit ? nextEvent : storedEvent);
+        });
 
-        if (!saveEvents(nextEvents)) {
+        if (result === 'storage-error') {
             setFormError('No se pudo guardar en este navegador. Revisa el espacio disponible y vuelve a intentarlo.');
+            render();
+            return;
+        }
+        if (result === 'missing') {
+            setFormError('Este evento se eliminó en otra pestaña. No se guardaron los cambios.');
+            render();
             return;
         }
 
-        events = nextEvents;
-        calendarStatus.textContent = editingEventId ? 'Evento actualizado en este navegador.' : 'Evento guardado en este navegador.';
+        calendarStatus.textContent = eventIdToEdit ? 'Evento actualizado en este navegador.' : 'Evento guardado en este navegador.';
         closeEventForm();
         render();
     }
@@ -327,9 +374,15 @@
         render();
     }
 
+    function focusCalendarDate(dateKey) {
+        const button = calendarGrid.querySelector('button[data-date="' + dateKey + '"]');
+        if (button) button.focus();
+    }
+
     document.getElementById('previousMonth').addEventListener('click', () => navigateMonth(-1));
     document.getElementById('nextMonth').addEventListener('click', () => navigateMonth(1));
     document.getElementById('todayButton').addEventListener('click', () => {
+        refreshTodayKey();
         selectedDateKey = todayKey;
         currentMonth = parseDateKey(todayKey);
         calendarStatus.textContent = '';
@@ -345,6 +398,7 @@
         }
         calendarStatus.textContent = '';
         render();
+        focusCalendarDate(selectedDateKey);
     });
     addEventButton.addEventListener('click', openNewEventForm);
     document.getElementById('cancelEventButton').addEventListener('click', () => closeEventForm());
@@ -364,16 +418,49 @@
             return;
         }
         if (button.dataset.action === 'delete' && window.confirm(`¿Eliminar “${storedEvent.title}” y todas sus repeticiones?`)) {
-            const nextEvents = events.filter((item) => item.id !== storedEvent.id);
-            if (!saveEvents(nextEvents)) {
+            const eventIdToDelete = storedEvent.id;
+            const deletingOpenForm = editingEventId === eventIdToDelete;
+            const result = updateStoredEvents((latestEvents) =>
+                latestEvents.some((item) => item.id === eventIdToDelete)
+                    ? latestEvents.filter((item) => item.id !== eventIdToDelete)
+                    : null);
+            if (result === 'storage-error') {
                 calendarStatus.textContent = 'No se pudo eliminar el evento del almacenamiento del navegador.';
+                render();
+                addEventButton.focus();
                 return;
             }
-            events = nextEvents;
+            if (result === 'missing') {
+                calendarStatus.textContent = 'Este evento ya no existe en el almacenamiento del navegador.';
+                render();
+                addEventButton.focus();
+                return;
+            }
+
+            if (deletingOpenForm) closeEventForm(false);
             calendarStatus.textContent = 'Evento y sus repeticiones eliminados.';
             render();
+            addEventButton.focus();
         }
     });
 
+    window.addEventListener('storage', (storageEvent) => {
+        if (storageEvent.key !== null && storageEvent.key !== EVENTS_STORAGE_KEY) return;
+
+        const activeDateKey = document.activeElement?.dataset?.date;
+        const eventListHadFocus = eventList.contains(document.activeElement);
+        events = loadEvents();
+        const editedEventWasRemoved = editingEventId && !events.some((item) => item.id === editingEventId);
+        if (editedEventWasRemoved) closeEventForm(false);
+        render();
+
+        if (activeDateKey) focusCalendarDate(activeDateKey);
+        else if (eventListHadFocus || editedEventWasRemoved) addEventButton.focus();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && refreshTodayKey()) render();
+    });
+    scheduleTodayRefresh();
     render();
 })();

@@ -258,9 +258,9 @@
     justify-content: center;
     gap: 8px;
     padding: 0 15px;
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-primary-dark);
     border-radius: 12px;
-    background: var(--color-primary);
+    background: var(--color-primary-dark);
     color: #fff;
     font: inherit;
     font-size: 12px;
